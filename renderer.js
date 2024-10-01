@@ -69,6 +69,14 @@ function refreshSerialPorts()
             newOption.innerHTML = newOption.innerHTML + " (Arduino Mega)"; 
             newOption.setAttribute("board", "ATMEGA2560");
           }
+          else if(ports[i].productId == "0070")
+          {
+            newOption.innerHTML = newOption.innerHTML + " (Arduino nano ESP32)"; 
+          }
+          else
+          {
+            newOption.innerHTML = newOption.innerHTML + " (Arduino " + ports[i].vendorId + ":"+ ports[i].productId + ")";
+          }
         }
         else if(ports[i].vendorId == "16c0" || ports[i].vendorId == "16C0")
         {
@@ -80,6 +88,56 @@ function refreshSerialPorts()
           //Get the short copy of the teensy version
           teensyVersion = teensyVersion.replace(".", "");
           newOption.setAttribute("board", "TEENSY"+teensyVersion);
+        }
+        else if((ports[i].vendorId == "1a86" || ports[i].vendorId == "1A86") && ports[i].productId == "7523")
+        {
+          newOption.innerHTML = newOption.innerHTML + " (Arduino nano)"; 
+        }
+        else if((ports[i].vendorId == "10c4" || ports[i].vendorId == "10C4") && (ports[i].productId == "ea60" || ports[i].productId == "EA60"))
+        {
+          newOption.innerHTML = newOption.innerHTML + " (Espressif ESP32-S3)"; 
+        }
+        else if((ports[i].vendorId == "303a" || ports[i].vendorId == "303A") && ports[i].productId == "1001")
+        {
+          newOption.innerHTML = newOption.innerHTML + " (Seeed Xaio ESP32-S3)"; 
+        }
+        else if(ports[i].vendorId == "303a" || ports[i].vendorId == "303A")
+        {
+          newOption.innerHTML = newOption.innerHTML + " (Espressif:" + ports[i].productId + ")"; 
+        }
+        else if(ports[i].vendorId == "239a" || ports[i].vendorId == "239A")
+        {
+          if(ports[i].productId == "8147")
+          {
+            newOption.innerHTML = newOption.innerHTML + " (Adafruit Qualia RGB666 ESP32-S3)"; 
+          }
+          else if(ports[i].productId == "8119")
+          {
+          newOption.innerHTML = newOption.innerHTML + " (Adafruit QT Py ESP32-S3 No PSRAM)"; 
+          }
+          else
+          {
+          newOption.innerHTML = newOption.innerHTML + " (Adafruit:" + ports[i].productId + ")"; 
+          }
+        }
+        else if(ports[i].vendorId == "2e8a" || ports[i].vendorId == "2E8A")
+        {
+          if(ports[i].productId == "1018")
+          {
+            newOption.innerHTML = newOption.innerHTML + " (Pimironi PGA2350)"; 
+          }
+          else if(ports[i].productId == "000A")
+          {
+          newOption.innerHTML = newOption.innerHTML + " (Raspberry Pi Pico)"; 
+          }
+          else if(ports[i].productId == "000F")
+          {
+          newOption.innerHTML = newOption.innerHTML + " (Raspberry Pi Pico 2)"; 
+          }
+          else
+          {
+            newOption.innerHTML = newOption.innerHTML + " (Raspberry Pi:" + ports[i].productId + ")"; 
+          }
         }
         else if(ports[i].vendorId == "1a86" || ports[i].vendorId == "1A86")
         {
@@ -96,6 +154,7 @@ function refreshSerialPorts()
         }
         else
         {
+          newOption.innerHTML = newOption.innerHTML + " (" + ports[i].vendorId + ":" + ports[i].productId + ")"; 
           //Unknown device, assume it's a mega2560
           newOption.setAttribute("board", "ATMEGA2560");
           console.log(ports[i].vendorId)
